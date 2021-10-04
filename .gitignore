@@ -1,0 +1,9 @@
+.allure
+.classpath
+.settings
+.vscode
+target
+.factorypath
+.project
+.gitignore
+.idea
