@@ -26,7 +26,7 @@ public class GetRequestBooking {
     public Response findByIdBookings(int id, JSONObject payload){
         return given()
                 .header("Accept", "application/json")
-                .queryParam("firstname","Carolina")
+                .param("firstname","Carolina")
                 .when()
                 .body(payload.toString())
                 .get("booking/" + id );
@@ -36,7 +36,7 @@ public class GetRequestBooking {
     public Response findByFistname(int id, JSONObject payload){
         return given()
                 .header("Accept", "application/json")
-                .queryParam("firstname","Susan")
+                .param("firstname","Susan")
                 .when()
                 .body(payload.toString())
                 .get("booking/" + id );

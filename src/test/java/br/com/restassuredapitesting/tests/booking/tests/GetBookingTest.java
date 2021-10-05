@@ -14,11 +14,13 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import static io.restassured.RestAssured.get;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.lessThan;
+import static org.hamcrest.Matchers.*;
 
 
 @Feature("Reservas")
@@ -85,15 +87,17 @@ public class GetBookingTest extends BaseTest {
     @DisplayName("Listar IDs de reservas utilizando o filtro firstname")
     @Description("Devo listar IDs de reservas utilizando o filtro firstname")
     public void verificarFirtnameDasReservas()throws Exception{
-        int primeiroId = getRequestBooking.allBookings().then().statusCode(200).extract().path("[2].bookingid");
+        int primeiroId = getRequestBooking.allBookings().then().statusCode(200).extract().path("[3].bookingid");
         System.out.println(primeiroId);
 
-        getRequestBooking.findByFistname(primeiroId, Utils.verificaPayload("Susan", "Ericsson",100, true, "Braekfast"))
+
+        getRequestBooking. findByFistname(primeiroId, Utils.verificaPayload("Susan", "Ericsson",100, true, "Braekfast"))
                 .then()
                 .log().all()
                 .statusCode(200)
                 .time(lessThan(2L), TimeUnit.SECONDS)
-                .body("size()", greaterThan(0));
+                .body("size()", greaterThan(0))
+                .body("firstname", equalTo("Susan"));
     }
 
 }
